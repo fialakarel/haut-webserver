@@ -21,4 +21,18 @@ $( "#teplota" ).html( msg );
             $( "#teplota" ).html( msg );
         });
     });
+    
+
+    $(".led_button_on").live('click',function(){
+        $.ajax({
+            url: '' + "on"
+        })
+    });
+
+    $(".led_button_off").live('click',function(){
+        $.ajax({
+            url: '' + "off"
+        })
+    });    
+    
 }); 
