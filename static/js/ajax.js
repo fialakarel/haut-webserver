@@ -1,38 +1,19 @@
 ;
 $(document).ready(function() {
-    
-    // takhle lze JS nastavit hodnotu
-    $("#teplota").html("--");
-    
-    // nactenim ajaxem funguje
-    /*
-        $ *.ajax({
-        url: '/temp'
-}).done(function( msg ) {
-$( "#teplota" ).html( msg );
-});
-*/
-    
-    $(".temp_button").live('click',function(){
-        //$( "#content" ).html( "<strong>Loading ...</strong>" );
+ 
+    $(".set").live('click',function(){
         $.ajax({
-            url: '' + "temp"
-        }).done(function( msg ) {
-            $( "#teplota" ).html( msg );
+            url: '' + "set?value=" + $(this).attr("id")
+        })
+    });    
+    
+    $(".get").live('click',function(){
+        id=$(this).attr("id");
+        $.ajax({
+            url: '' + "get?value=" + $(this).attr("id")
+        }).done(function(msg1) {
+            $("#" + id).text(msg1)
         });
-    });
-    
-
-    $(".led_button_on").live('click',function(){
-        $.ajax({
-            url: '' + "on"
-        })
-    });
-
-    $(".led_button_off").live('click',function(){
-        $.ajax({
-            url: '' + "off"
-        })
     });    
     
 }); 
