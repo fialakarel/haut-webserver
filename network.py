@@ -29,8 +29,6 @@ class Network(object):
 
     def __init__(self, ip = "", port = 0):
 
-        self.createdns()
-
         self.server = False;
         self.addr = False;
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -39,24 +37,9 @@ class Network(object):
             self.server = True;
         pass
 
-    def createdns(self):
-        # define IP -- DNS too slow and fails often
-        self.host = dict()
-        self.host["main.haut.local"] = "192.168.1.74"
-        self.host["dev.haut.local"] = "192.168.1.90"
-        self.host["webserver.haut.local"] = "127.0.0.1"
-
-    def getip(self, host):
-        return self.host[host]
-
-    def gethost(self, ip):
-        for value, key in self.host.items():
-            if key == ip:
-                return value
-
-    def send(self, message, host, port):
+    def send(self, message, ip, port):
         try:
-            self.sock.sendto(bytes(json.dumps(message), "utf-8"), (self.host[host] , port))
+            self.sock.sendto(bytes(json.dumps(message), "utf-8"), (ip , port))
         except ValueError:
             print("ValueError happen -- continuing")
             pass        # chyba JSONu
